@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1234@localhost/agentes_valorant'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://TearsDev:parchetta550@TearsDev.mysql.pythonanywhere-services.com/TearsDev$default'  # Cambia a la URI de tu base de datos
 db = SQLAlchemy(app)
 
 # Modelo de la tabla Agente
@@ -62,6 +62,7 @@ def crear_agentes():
             nombre=datos_agente['nombre'],
             descripcion=datos_agente['descripcion'],
             imagen=datos_agente['imagen']
+            # Puedes agregar más campos para otras propiedades del agente
         )
 
         habilidades = []
@@ -112,7 +113,7 @@ def obtener_agente(agente_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 # Ruta para actualizar un agente existente
 @app.route('/actualizar_agente/<int:agente_id>', methods=['PUT'])
 def actualizar_agente(agente_id):
@@ -139,7 +140,7 @@ def actualizar_agente(agente_id):
 
         db.session.commit()
 
-        return jsonify({"mensaje": "Agente actualizado exitosamente"}), 200  
+        return jsonify({"mensaje": "Agente actualizado exitosamente"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -159,5 +160,6 @@ def eliminar_agente(agente_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/')
+def hello_world():
+    return 'Hello from Flask!'
