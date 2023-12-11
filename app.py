@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://TearsDev:parchetta550@TearsDev.mysql.pythonanywhere-services.com/TearsDev$default'  # Cambia a la URI de tu base de datos
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://TearsDev:parchetta550@TearsDev.mysql.pythonanywhere-services.com/TearsDev$default'
 db = SQLAlchemy(app)
 
 # Modelo de la tabla Agente
